@@ -132,7 +132,7 @@
         },
 
         createToolbarButtons: function () {
-            var ul = this.document.createElement('ul'),
+            var group = this.document.createElement('group'),
                 li,
                 btn,
                 buttons,
@@ -140,9 +140,9 @@
                 buttonName,
                 buttonOpts;
 
-            ul.id = 'medium-editor-toolbar-actions' + this.getEditorId();
-            ul.className = 'medium-editor-toolbar-actions';
-            ul.style.display = 'block';
+            group.id = 'medium-editor-toolbar-actions' + this.getEditorId();
+            group.className = 'medium-editor-toolbar-actions ui icon buttons';
+            group.style.display = 'block';
 
             this.buttons.forEach(function (button) {
                 if (typeof button === 'string') {
@@ -159,23 +159,17 @@
 
                 if (extension && typeof extension.getButton === 'function') {
                     btn = extension.getButton(this.base);
-                    li = this.document.createElement('li');
-                    if (MediumEditor.util.isElement(btn)) {
-                        li.appendChild(btn);
-                    } else {
-                        li.innerHTML = btn;
-                    }
-                    ul.appendChild(li);
+                    group.appendChild(btn);
                 }
             }, this);
 
-            buttons = ul.querySelectorAll('button');
+            buttons = group.querySelectorAll('button');
             if (buttons.length > 0) {
                 buttons[0].classList.add(this.firstButtonClass);
                 buttons[buttons.length - 1].classList.add(this.lastButtonClass);
             }
 
-            return ul;
+            return group;
         },
 
         destroy: function () {
