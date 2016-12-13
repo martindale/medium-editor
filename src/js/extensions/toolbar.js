@@ -132,7 +132,7 @@
         },
 
         createToolbarButtons: function () {
-            var group = this.document.createElement('group'),
+            var group = this.document.createElement('div'),
                 li,
                 btn,
                 buttons,
